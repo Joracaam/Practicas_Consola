@@ -10,7 +10,7 @@ namespace Ejercicios_Programacion_Consola
         static void Main(string[] args)
         {
             bool nextIteration = true;
-            ejercicios.ejercicios mat = new ejercicios.ejercicios();
+            ejercicios.Ejercicios mat = new ejercicios.Ejercicios();
 
             //Options
             do

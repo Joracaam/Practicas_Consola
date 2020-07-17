@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Ejercicios_Programacion_Consola.ejercicios
 {
-    public class ejercicios
+    public class Ejercicios
     {
         public int firstValue { get; set; }
         public int secondValue { get; set; }
@@ -39,6 +39,10 @@ namespace Ejercicios_Programacion_Consola.ejercicios
                                 "13- Mostrar los proximos n numeros a partor de un numero dado\n" +
                                 "14- Mostrar los multiplos de 3 desde el 1 al 50\n" +
                                 "15- Vector\n" +
+                                "16- Vector de salarios\n" +
+                                "17- Vector de Paises\n" +
+                                "18- Ordenar Vectores paralelos\n" +
+                                "19- Matrix\n" +
                                 "Opcion: ");
 
             int SelectedOption = 0;
@@ -138,6 +142,24 @@ namespace Ejercicios_Programacion_Consola.ejercicios
                 
                 case 15:
                     vector();
+                    break;                
+                
+                case 16:
+                    Console.WriteLine("Los salarios en orden de menos mayor son: ");
+                    SortVector(5);
+                    break;
+
+                case 17:
+                    Console.WriteLine("Los paises en orden de menos mayor son: ");
+                    SortVector_string(5);
+                    break;
+
+                case 18:
+                    parallelVectorSorting(5);
+                    break;
+                
+                case 19:
+                    matrix(2,5);
                     break;
 
                 default:
@@ -556,12 +578,12 @@ namespace Ejercicios_Programacion_Consola.ejercicios
             }
         }
 
-        // Vector
+        // Min value in Vector and print how many time its  
         public void vector()
         {
             List<int> vector = new List<int>();
             bool follow = true;
-            int value = 0;
+            int value = 0, count = 0;
 
             do
             {
@@ -586,9 +608,185 @@ namespace Ejercicios_Programacion_Consola.ejercicios
 
             } while (follow);
 
-            Console.WriteLine($"El menor numero es: {vector.Min()}");
+            var minValueInArray = vector.Min();
+
+            foreach (var item in vector)
+            {
+                if (item == minValueInArray)
+                {
+                    count++;
+                }
+            }
+            Console.WriteLine($"El menor numero es {minValueInArray} y se repite {count} veces");
+        }
+
+        // Vector sorting
+        public void SortVector(int CountOfElements)
+        {
+            List<double> values = new List<double>();
+            int count = 0;
+
+            do
+            {
+                Console.Write($"Inserte el valor #{count+1}: ");
+                values.Add(double.Parse(Console.ReadLine()));
+                count++;
+            } while (count < CountOfElements);
+
+            values.Sort();
+            
+            foreach (var item in values)
+            {
+                Console.Write($" [{item}] ");
+            }
+        }
+
+        // Make an algorithm for sorting using string array
+        public void SortVector_string(int CountOfElements)
+        {
+            string[] values = new string[5];
+            int count = 0;
+
+            do
+            {
+                Console.Write($"Inserte el valor #{count + 1}: ");
+                values[count] = (Console.ReadLine());
+                count++;
+            } while (count < CountOfElements);
+
+            for (int i = 0; i < CountOfElements - 1; i++)
+            {
+                for (int j = i + 1; j < values.Length; j++)
+                {
+                    if (values[i].CompareTo(values[j]) > 0)
+                    {
+                        String temp = values[i];
+                        values[i] = values[j];
+                        values[j] = temp;
+                    }
+                }
+            }
+
+            foreach (var item in values)
+            {
+                Console.Write($" [{item}] ");
+            }
+        }
+
+        // Countries and Population
+        public void parallelVectorSorting(int countArray)
+        {
+            string[] stringArray = new string[countArray];
+            int[] intArray = new int[countArray];
+            int count = 0;
+
+            do
+            {
+                Console.Write($"\nInserte el nombre #{count + 1}: ");
+                stringArray[count] = (Console.ReadLine());
+
+                Console.Write($"Inserte el nombre #{count + 1}: ");
+                intArray[count] = Convert.ToInt32(Console.ReadLine());
+                count++;
+            } while (count < countArray);
+
+            // Sorting for String Array
+            for (int i = 0; i < countArray - 1; i++)
+            {
+                for (int j = i + 1; j < stringArray.Length; j++)
+                {
+                    if (stringArray[i].CompareTo(stringArray[j]) > 0)
+                    {
+                        String tempString = stringArray[i];
+                        int tempInt = intArray[i];
+
+                        stringArray[i] = stringArray[j];
+                        stringArray[j] = tempString;
+
+                        intArray[i] = intArray[j];
+                        intArray[j] = tempInt;
+
+
+                    }
+                }
+            }
+
+            Console.WriteLine("\nEn order de las ciudades:");
+            for (int i = 0; i < stringArray.Length; i++)
+            {
+                Console.Write($" [{stringArray[i]}: {intArray[i]}] "); 
+            }
+
+            // Sorting for int Array
+            for (int i = 0; i < countArray - 1; i++)
+            {
+                for (int j = i + 1; j < intArray.Length; j++)
+                {
+                    if (intArray[i].CompareTo(intArray[j]) > 0)
+                    {
+                        String tempString = stringArray[i];
+                        int tempInt = intArray[i];
+
+                        stringArray[i] = stringArray[j];
+                        stringArray[j] = tempString;
+
+                        intArray[i] = intArray[j];
+                        intArray[j] = tempInt;
+
+
+                    }
+                }
+            }
+
+            Console.WriteLine("\nEn order de la poblacion:");
+            for (int i = 0; i < stringArray.Length; i++)
+            {
+                Console.Write($" [{stringArray[i]}: {intArray[i]}] ");
+            }
 
         }
 
+        // Matrix
+        public void matrix(int rows, int columns)
+        {
+            int[,] matrix = new int[rows,columns];
+
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < columns; j++)
+                {
+                    Console.Write($"Ingrese el valor en la posicion [{i},{j}]: ");
+                    matrix[i,j] = Convert.ToInt32(Console.ReadLine());
+                }
+            }
+
+            Console.WriteLine("\nLa matriz es:\n");
+            for (int i = 0; i < rows; i++)
+            {
+                Console.Write("\t|");
+                for (int j = 0; j < columns; j++)
+                {
+                    Console.Write($" \t{matrix[i,j]} ");
+                }
+                Console.WriteLine("\t|");
+            }
+        }
+
+        // Temperature by country
+        public void temperature()
+        {
+            
+        }
+
+        // Average
+        public double average(List<double> values)
+        {
+            double Total = 0;
+            foreach (var item in values)
+            {
+                Total += item;
+            }
+            return Total/values.Count;
+        }
     }
 }
