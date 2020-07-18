@@ -7,13 +7,13 @@ namespace Ejercicios_Programacion_Consola.ejercicios
 {
     public class Ejercicios
     {
-        public int firstValue { get; set; }
-        public int secondValue { get; set; }
+        private int firstValue { get; set; }
+        private int secondValue { get; set; }
 
         public void Menu()
         {
             Console.Clear();
-            Console.Write("Opciones\nElija una opcion\n\n");
+            Console.Write("Elija una de las siguientes opciones\n\n");
 
             Console.Write("" +
                                 //"50- Sumar dos numeros\n" +
@@ -45,6 +45,9 @@ namespace Ejercicios_Programacion_Consola.ejercicios
                                 "19- Matrix\n" +
                                 "20- Temperatura promedio\n" +
                                 "21- Matriz Irregular\n" +
+                                "22- Empleados\n" +
+                                "23- Intercambio Matriz\n" +
+                                "24- Vertices Matriz\n" +
                                 "Opcion: ");
 
             int SelectedOption = 0;
@@ -161,11 +164,39 @@ namespace Ejercicios_Programacion_Consola.ejercicios
                     break;
                 
                 case 19:
-                    matrix(2,5);
+                    printMatrix(matrix(2,5));
                     break;
                     
                 case 21:
                     irregularMatrix(5);
+                    break;                    
+                
+                case 22:
+                    employeeAttendance(3);
+                    break;                
+                
+                case 23:
+                    Console.Write("Cantidad de Filas: ");
+                    firstValue = Convert.ToInt32(Console.ReadLine());
+
+                    Console.Write("Cantidad de Columnas: ");
+                    secondValue = Convert.ToInt32(Console.ReadLine());
+
+                    var _matrix = matrix(firstValue, secondValue);
+
+                    Console.WriteLine($"\nMatriz ANTES de intercambiar las filas {1} y {2}");
+                    printMatrix(_matrix);
+
+                    Console.WriteLine($"Matriz LUEGO de intercambiar las filas {1} y {2}");
+                    printMatrix(changeRowsMatrixOrder(_matrix, 1, 2));                    
+                    break;
+                case 24:
+                    Console.Write("Cantidad de filas: ");
+                    firstValue = Convert.ToInt32(Console.ReadLine());
+
+                    Console.Write("Cantidad de columnas: ");
+                    secondValue = Convert.ToInt32(Console.ReadLine());
+                    printMatrixVertex(matrix(firstValue, secondValue));
                     break;
 
                 default:
@@ -174,6 +205,7 @@ namespace Ejercicios_Programacion_Consola.ejercicios
 
         }
 
+        //WebServices
         // Method to get the Max double value in an array
         public Int64 MajorNumber()
         {
@@ -277,6 +309,24 @@ namespace Ejercicios_Programacion_Consola.ejercicios
             }
         }
 
+        // Method to get the power of a number (base) elevated to a number (exponent)
+        public int pow()
+        {
+            Console.Write("Inserte el valor de ls base: ");
+            int baseValue = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("Inserte el valor del exponente: ");
+            int exponentValue = Convert.ToInt32(Console.ReadLine());
+
+            int pow = baseValue;
+
+            for (int i = 1; i < exponentValue; i++)
+            {
+                pow *= baseValue;
+            }
+            return (pow);
+        }
+
         // Method to get the division of two variables
         public void divideAndGetRest()
         {
@@ -297,6 +347,7 @@ namespace Ejercicios_Programacion_Consola.ejercicios
             }
         }
 
+
         // Method to get the  two double variables
         public void modularDivision(int a, int b)
         {
@@ -312,23 +363,6 @@ namespace Ejercicios_Programacion_Consola.ejercicios
             }
         }
 
-        // Method to get the power of a number (base) elevated to a number (exponent)
-        public int pow()
-        {
-            Console.Write("Inserte el valor de ls base: ");
-            int baseValue = Convert.ToInt32(Console.ReadLine());
-
-            Console.Write("Inserte el valor del exponente: ");
-            int exponentValue = Convert.ToInt32(Console.ReadLine());
-
-            int pow = baseValue;
-
-            for (int i = 1; i < exponentValue; i++)
-            {
-                pow *= baseValue;
-            }
-            return (pow);
-        }
 
         // Method to get the power of a number 'a' elevated to a number 'b'
         public void isMultiple()
@@ -753,7 +787,7 @@ namespace Ejercicios_Programacion_Consola.ejercicios
         }
 
         // Matrix
-        public void matrix(int rows, int columns)
+        public int[,] matrix(int rows, int columns)
         {
             int[,] matrix = new int[rows,columns];
 
@@ -766,13 +800,18 @@ namespace Ejercicios_Programacion_Consola.ejercicios
                 }
             }
 
+            return matrix;
+        }
+
+        public void printMatrix(int[,] matrix)
+        {
             Console.WriteLine("\nLa matriz es:\n");
-            for (int i = 0; i < rows; i++)
+            for (int i = 0; i < matrix.GetLength(0); i++)
             {
                 Console.Write("\t|");
-                for (int j = 0; j < columns; j++)
+                for (int j = 0; j < matrix.GetLength(1); j++)
                 {
-                    Console.Write($" \t{matrix[i,j]} ");
+                    Console.Write($" \t{matrix[i, j]} ");
                 }
                 Console.WriteLine("\t|");
             }
@@ -799,11 +838,49 @@ namespace Ejercicios_Programacion_Consola.ejercicios
         public void irregularMatrix(int rows)
         {
             var matrix = new EjerciciosPropuestos.Matrix(rows);
+            matrix.initializeVector(rows);
 
             Console.WriteLine("\nLa matriz es:\n");
             matrix.printMatrix();
         }
 
-        // 
+        // Employees attendance
+        public void employeeAttendance(int count)
+        {
+            var employees = new EjerciciosPropuestos.EmpleyeeAttendance(count);
+            employees.InitializeNonAttendanceMatrix();
+
+        }
+
+        // Change rows order in Matrix
+        public int[,] changeRowsMatrixOrder(int[,] matrix, int numRowFrom, int numRowTo)
+        {
+            if (matrix.GetLength(0) > 1)
+            {
+                for (int i  = 0; i < matrix.GetLength(1); i++)
+                {
+                    int temp = matrix[numRowFrom - 1, i];
+                    matrix[numRowFrom - 1, i] = matrix[numRowTo - 1, i];
+                    matrix[numRowTo - 1, i] = temp;
+                }
+            }
+            else
+            {
+                Console.WriteLine("La matriz cuenta con menos de dos filas");
+            }
+            
+            return matrix;
+        }
+
+        // Print matrix vertex
+        public void printMatrixVertex(int[,] matrix)
+        {
+            Console.WriteLine("\nLos vertices son: \n");
+
+            Console.WriteLine($"\tVertice [0,0]: {matrix[0,0]}");
+            Console.WriteLine($"\tVertice [0,{matrix.GetLength(1) -1}]: {matrix[0, matrix.GetLength(1) -1 ]}");
+            Console.WriteLine($"\tVertice [{matrix.GetLength(0) - 1},0]: {matrix[matrix.GetLength(0) -1 ,0]}");
+            Console.WriteLine($"\tVertice [{matrix.GetLength(0) -1},{matrix.GetLength(1) - 1}]: {matrix[matrix.GetLength(0) -1,matrix.GetLength(1) -1]}");
+        }
     }
 }

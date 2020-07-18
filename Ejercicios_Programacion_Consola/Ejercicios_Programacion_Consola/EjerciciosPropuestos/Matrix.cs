@@ -8,13 +8,12 @@ namespace Ejercicios_Programacion_Consola.EjerciciosPropuestos
     {
         private int[][] matrix { get; set; }
 
-        public Matrix(int count)
+        public Matrix(int count, int mode = 0)
         {
             this.matrix = new int[count][];
-            initializeVector(5);
         }
 
-        private void initializeVector(int rows)
+        public void initializeVector(int rows)
         {
             var count = 0;
 
@@ -34,6 +33,21 @@ namespace Ejercicios_Programacion_Consola.EjerciciosPropuestos
                 count++;
 
             } while (count < rows);
+        }
+
+        public void initializeVector(int first, int second)
+        {
+
+            var vector = new int[second];
+
+            for (int i = 0; i < second; i++)
+            {
+                Console.Write($"\nIngrese el valor [{first}][{i}]: ");
+                vector[i] = Convert.ToInt32(Console.ReadLine());
+            }
+
+            this.matrix[first] = vector;
+
         }
 
         public void printMatrix()
