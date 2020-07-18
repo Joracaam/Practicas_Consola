@@ -367,10 +367,10 @@ namespace Ejercicios_Programacion_Consola.ejercicios
         // Method to get the power of a number 'a' elevated to a number 'b'
         public void isMultiple()
         {
-            Console.Write("Ingrese el primer valor a dividir: ");
+            Console.Write("Ingrese el primer valor: ");
             int firstInsertedValue = Convert.ToInt32(Console.ReadLine());
 
-            Console.Write("Ingrese el segundo valor a dividir: ");
+            Console.Write("Ingrese el segundo valor: ");
             int secondInsertedValue = Convert.ToInt32(Console.ReadLine());
 
             if (secondInsertedValue != 0)
@@ -460,7 +460,7 @@ namespace Ejercicios_Programacion_Consola.ejercicios
         public void countRealNumbers()
         {
             int count = 0;
-            Console.Write("\nIngrese el primer valor que desea multiplicar: ");
+            Console.Write("\nIngrese el primer valor: ");
             var firstValue = Convert.ToInt32(Console.ReadLine());
 
             if (firstValue > 0)
@@ -468,7 +468,7 @@ namespace Ejercicios_Programacion_Consola.ejercicios
                 count++;
             }
 
-            Console.Write("\nIngrese el segundo valor que desea multiplicar: ");
+            Console.Write("\nIngrese el segundo valor: ");
             var secondValue = Convert.ToInt32(Console.ReadLine());
 
             if (secondValue > 0)
@@ -725,7 +725,7 @@ namespace Ejercicios_Programacion_Consola.ejercicios
                 Console.Write($"\nInserte el nombre #{count + 1}: ");
                 stringArray[count] = (Console.ReadLine());
 
-                Console.Write($"Inserte el nombre #{count + 1}: ");
+                Console.Write($"Inserte cantidad de habitantes #{count + 1}: ");
                 intArray[count] = Convert.ToInt32(Console.ReadLine());
                 count++;
             } while (count < countArray);
