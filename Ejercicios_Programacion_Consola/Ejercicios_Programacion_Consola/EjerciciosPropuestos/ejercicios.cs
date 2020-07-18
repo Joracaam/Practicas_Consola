@@ -43,6 +43,8 @@ namespace Ejercicios_Programacion_Consola.ejercicios
                                 "17- Vector de Paises\n" +
                                 "18- Ordenar Vectores paralelos\n" +
                                 "19- Matrix\n" +
+                                "20- Temperatura promedio\n" +
+                                "21- Matriz Irregular\n" +
                                 "Opcion: ");
 
             int SelectedOption = 0;
@@ -160,6 +162,10 @@ namespace Ejercicios_Programacion_Consola.ejercicios
                 
                 case 19:
                     matrix(2,5);
+                    break;
+                    
+                case 21:
+                    irregularMatrix(5);
                     break;
 
                 default:
@@ -788,5 +794,16 @@ namespace Ejercicios_Programacion_Consola.ejercicios
             }
             return Total/values.Count;
         }
+
+        // Irregular Matrix
+        public void irregularMatrix(int rows)
+        {
+            var matrix = new EjerciciosPropuestos.Matrix(rows);
+
+            Console.WriteLine("\nLa matriz es:\n");
+            matrix.printMatrix();
+        }
+
+        // 
     }
 }
