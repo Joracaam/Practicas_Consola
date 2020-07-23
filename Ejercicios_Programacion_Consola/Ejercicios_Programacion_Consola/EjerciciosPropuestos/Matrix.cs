@@ -50,6 +50,20 @@ namespace Ejercicios_Programacion_Consola.EjerciciosPropuestos
 
         }
 
+        public void AutoFillVector(int first, int second)
+        {
+
+            var vector = new int[second];
+
+            for (int i = 0; i < second; i++)
+            {
+                Console.Write($"\nvalor [{first}][{i}]: 0");
+                vector[i] = 0;
+            }
+
+            this.matrix[first] = vector;
+        }
+
         public void printMatrix()
         {
             for (int i = 0; i < this.matrix.Length; i++)
@@ -61,5 +75,21 @@ namespace Ejercicios_Programacion_Consola.EjerciciosPropuestos
                 Console.WriteLine("\t");
             }
         }
+
+        public void printMatrixSub(int index)
+        {
+
+            for (int j = 0; j < matrix[index].Length; j++)
+            {
+                Console.Write($"\t{matrix[index][j]} ");
+            }
+            Console.WriteLine("\t");
+        }
+
+        public int Length(int index)
+        {
+            return matrix[index].Length;
+        }
+
     }
 }

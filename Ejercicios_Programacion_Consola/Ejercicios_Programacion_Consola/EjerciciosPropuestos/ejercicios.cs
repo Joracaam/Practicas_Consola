@@ -808,6 +808,9 @@ namespace Ejercicios_Programacion_Consola.ejercicios
         {
             var employees = new EjerciciosPropuestos.EmpleyeeAttendance(count);
             employees.InitializeNonAttendanceMatrix();
+            employees.PrintMatrix();
+            employees.MaxNonAttandande();
+
 
         }
 

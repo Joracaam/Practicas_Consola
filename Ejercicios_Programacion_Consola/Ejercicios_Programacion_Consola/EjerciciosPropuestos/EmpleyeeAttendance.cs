@@ -30,20 +30,38 @@ namespace Ejercicios_Programacion_Consola.EjerciciosPropuestos
 
             for (int i = 0; i < this.employees.Length; i++)
             {
-                Console.Write($"Cantidad de ausencias para el usuario {this.employees[i]}: ");
-                attendance.initializeVector(i,Convert.ToInt32(Console.ReadLine()));
+                Console.Write($"\nCantidad de ausencias para el usuario {this.employees[i]}: ");
+                attendance.AutoFillVector(i,Convert.ToInt32(Console.ReadLine()));
             }
 
         }
 
-        public void RegisterNonAttendance()
+        public void PrintMatrix()
         {
-
+            Console.WriteLine("\nLas ausencias son\n");
+            for (int i = 0; i < this.employees.Length; i++)
+            {
+                Console.Write($"\n{this.employees[i]}:");
+                attendance.printMatrixSub(i);
+            }
         }
 
-        public void GetNonAttendance()
+        public void MaxNonAttandande()
         {
+            int count = 0;
+            int max = 0;
+         
+            for (int i = 0; i < this.employees.Length; i++)
+            {
+                var value = attendance.Length(i);
+                if (value > max)
+                {
+                    max = value;
+                    count = i;
+                }
+            }
 
+            Console.WriteLine($"\nEl empleado con mas ausencias es {employees[count]} con un total de {max} ausencias");
         }
 
     }
