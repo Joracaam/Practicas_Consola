@@ -41,5 +41,10 @@ namespace Ejercicios_Programacion_Consola.EjerciciosPropuestos
 
         }
 
+        public void GetNonAttendance()
+        {
+
+        }
+
     }
 }

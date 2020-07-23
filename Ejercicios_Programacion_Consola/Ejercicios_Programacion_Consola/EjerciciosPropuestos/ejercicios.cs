@@ -16,13 +16,6 @@ namespace Ejercicios_Programacion_Consola.ejercicios
             Console.Write("Elija una de las siguientes opciones\n\n");
 
             Console.Write("" +
-                                //"50- Sumar dos numeros\n" +
-                                //"51- Restar dos numeros\n" +
-                                //"52- Multiplicar dos numeros\n" +
-                                //"53- Dividir dos numeros\n" +
-                                //"54- Potencia\n" +
-                                //"55- Invertir un numero\n" +
-                                //"56- Obtener el numero mayor\n\n" +
                                 "Ejercicios propuestos:\n\n" +
                                 "1- Cociente y residuo\n" +
                                 "2- Hallar Multiplos\n" +
@@ -41,7 +34,7 @@ namespace Ejercicios_Programacion_Consola.ejercicios
                                 "15- Vector\n" +
                                 "16- Vector de salarios\n" +
                                 "17- Vector de Paises\n" +
-                                "18- Ordenar Vectores paralelos\n" +
+                                "18- Ordenar Vectores paralelos (Ciudades)\n" +
                                 "19- Matrix\n" +
                                 "20- Temperatura promedio\n" +
                                 "21- Matriz Irregular\n" +
@@ -56,37 +49,6 @@ namespace Ejercicios_Programacion_Consola.ejercicios
 
             switch (SelectedOption)
             {
-                case 50:
-                    Console.WriteLine($"La suma es: {add()}");
-                    break;
-                
-                case 51:
-                    Console.WriteLine($"La resta es: {substract()}");
-                    break;
-                
-                case 52:
-                    Console.WriteLine($"El producto es: {multiply()}");
-                    break;
-
-                case 53:
-                    Console.Write("Inserte el primer valor a dividir: ");
-                    firstValue = Convert.ToInt32(Console.ReadLine());
-
-                    Console.Write("Inserte el seguno valor a dividir: ");
-                    secondValue = Convert.ToInt32(Console.ReadLine());
-                    divide(firstValue, secondValue);
-                    break;
-
-                case 54:
-                    Console.WriteLine($"La Potencia es: {pow()}");
-                    break;
-
-                case 55:
-                    Console.WriteLine($"El numero invertido es: {InvertNumber()}");
-                    break;
-                case 56:
-                    Console.WriteLine($"El numero mayor es: {MajorNumber()}");
-                    break;
                 case 1:
                     divideAndGetRest();
                     break;
@@ -165,6 +127,10 @@ namespace Ejercicios_Programacion_Consola.ejercicios
                 
                 case 19:
                     printMatrix(matrix(2,5));
+                    break;
+
+                case 20:
+                    AvgValue(4,3);
                     break;
                     
                 case 21:
@@ -346,7 +312,6 @@ namespace Ejercicios_Programacion_Consola.ejercicios
                 Console.WriteLine($"No puede dividir entre cero");
             }
         }
-
 
         // Method to get the  two double variables
         public void modularDivision(int a, int b)
@@ -817,12 +782,6 @@ namespace Ejercicios_Programacion_Consola.ejercicios
             }
         }
 
-        // Temperature by country
-        public void temperature()
-        {
-            
-        }
-
         // Average
         public double average(List<double> values)
         {
@@ -881,6 +840,70 @@ namespace Ejercicios_Programacion_Consola.ejercicios
             Console.WriteLine($"\tVertice [0,{matrix.GetLength(1) -1}]: {matrix[0, matrix.GetLength(1) -1 ]}");
             Console.WriteLine($"\tVertice [{matrix.GetLength(0) - 1},0]: {matrix[matrix.GetLength(0) -1 ,0]}");
             Console.WriteLine($"\tVertice [{matrix.GetLength(0) -1},{matrix.GetLength(1) - 1}]: {matrix[matrix.GetLength(0) -1,matrix.GetLength(1) -1]}");
+        }
+
+        // Average Temperature
+        public void AvgValue(int firstDimension, int secondDimension)
+        {
+            int _count = 0;
+            string[] name = new string[firstDimension];
+            double[,] values = new double[firstDimension,secondDimension];
+
+            do
+            {
+                Console.Write($"\nIngrese el Nombre No. {_count+1 }: ");
+                name[_count] = Console.ReadLine();
+
+                int _count_2 = 0;
+                do
+                {
+                    Console.Write($"\n\tValor No. {_count_2+1}: ");
+                    values[_count,_count_2] = Convert.ToDouble(Console.ReadLine());
+                    _count_2++;
+
+                } while (_count_2 < secondDimension);
+
+                _count++;
+            } while (_count < firstDimension);
+
+            Console.Clear();
+            Console.WriteLine("\nValores Capturados\n");
+            for (int i = 0; i < name.Length; i++)
+            {
+                Console.Write($"\n\t{name[i]}: ");
+                for (int j = 0; j < values.GetLength(1); j++)
+                {
+                    Console.Write($"\t\t[{values[i,j]}] ");
+
+                }
+            }
+
+            double val = 0;
+            int max = 0;
+
+            Console.WriteLine("\nValores Promedios\n");
+            for (int i = 0; i < name.Length; i++)
+            {
+                Console.Write($"\n\t{name[i]}: ");
+                double Total = 0;
+                for (int j = 0; j < values.GetLength(1); j++)
+                {                
+                    Total += values[i, j];
+                }
+                var prom = Total / values.GetLength(1);
+                Console.WriteLine($"\t\t[{prom}]");
+
+                if (prom >= val)
+                {
+                    val = prom;
+                    max = i;
+
+                }
+            }
+
+            Console.WriteLine("\nEl promedio mayor\n");
+            Console.WriteLine($"\t\t\n{name[max]}: [{val}]");
+
         }
     }
 }
